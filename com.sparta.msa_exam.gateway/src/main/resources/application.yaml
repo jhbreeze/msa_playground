@@ -1,0 +1,43 @@
+server:
+  port: 19091
+
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: order
+          uri: lb://order
+          predicates:
+            - Path=/orders/**
+        - id: product
+          uri: lb://product
+          predicates:
+            - Path=/products/**
+        - id: auth
+          uri: lb://auth
+          predicates:
+            - Path=/auth/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:19090/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+
+service:
+  jwt:
+    secret-key: ${JWT_SECRET_KEY}
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG

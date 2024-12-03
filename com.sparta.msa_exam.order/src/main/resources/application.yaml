@@ -1,0 +1,13 @@
+server:
+  port: 19092
+
+spring:
+  application:
+    name: order
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config
+  profiles:
+    active: dev

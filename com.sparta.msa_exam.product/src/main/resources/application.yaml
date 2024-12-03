@@ -1,0 +1,37 @@
+server:
+  port: 19093
+
+spring:
+  application:
+    name: product
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config
+  profiles:
+    active: ${PROFILE:dev}
+
+---
+spring:
+  config:
+    activate:
+      on-profile: instance1
+server:
+  port: 19093
+eureka:
+  instance:
+    metadata-map:
+      weight: 70
+
+---
+spring:
+  config:
+    activate:
+      on-profile: instance2
+server:
+  port: 19094
+eureka:
+  instance:
+    metadata-map:
+      weight: 30
