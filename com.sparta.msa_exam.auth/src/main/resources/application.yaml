@@ -1,0 +1,13 @@
+server:
+  port: 19095
+
+spring:
+  application:
+    name: auth
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config
+  profiles:
+    active: dev
